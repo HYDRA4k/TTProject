@@ -34,18 +34,22 @@ namespace TTProject.PlayerControl
 
             _xVelHash = Animator.StringToHash("X_Velocity");
             _yVelHash = Animator.StringToHash("Y_Velocity");
+
+            // Lock Cursor
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
 
         private void FixedUpdate()
         {
             Move();
         }
-
+        
         private void LateUpdate()
         {
             CamMovements();
         }
-
+        
         private void Move()
         {
             if (!hasAnimator) return;
@@ -65,15 +69,16 @@ namespace TTProject.PlayerControl
             animator.SetFloat(_yVelHash, currentVelocity.y);
         }
 
+        // Camera Movement
         private void CamMovements()
         {
             if (!hasAnimator) return;
 
             var Mouse_X = inputManager.Look.x;
-            var Mouse_Y = inputManager.Look.y;
-            mainCamera.position = cameraRoot.position;
+            //var Mouse_Y = inputManager.Look.y;
+            //mainCamera.position = cameraRoot.position;
 
-            xRotation -= Mouse_Y * MouseSensitivity * Time.deltaTime;
+            //xRotation -= Mouse_Y * MouseSensitivity * Time.deltaTime;
             xRotation = Mathf.Clamp(xRotation, UpperLimit, BottomLimit);
 
             mainCamera.localRotation = Quaternion.Euler(xRotation, 0, 0);
