@@ -50,6 +50,7 @@ namespace TTProject.PlayerControl
             CamMovements();
         }
         
+        // Move of the player with new input system
         private void Move()
         {
             if (!hasAnimator) return;
